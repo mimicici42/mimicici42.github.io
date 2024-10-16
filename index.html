@@ -4,6 +4,9 @@
     <title>Турниры</title>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
+    <script>
+        console.log('Firebase SDK загружен');
+    </script>
 </head>
 <body>
     <h1>Добро пожаловать на сайт турниров!</h1>
@@ -16,6 +19,8 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+        
+        console.log('Firebase модули загружены');
 
         const firebaseConfig = {
             apiKey: "AIzaSyAPMO1LCgDDVZ2MWEAi2Kd-0f95zZm3jps",
@@ -30,6 +35,8 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+
+        console.log('Firebase инициализирован');
 
         document.getElementById('register-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -46,3 +53,4 @@
     </script>
 </body>
 </html>
+

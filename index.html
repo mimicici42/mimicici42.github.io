@@ -4,9 +4,6 @@
     <title>Турниры</title>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
-    <script>
-        console.log('Firebase SDK загружен');
-    </script>
 </head>
 <body>
     <h1>Добро пожаловать на сайт турниров!</h1>
@@ -16,12 +13,11 @@
         <input type="password" id="password" placeholder="Password" required>
         <button type="submit">Register</button>
     </form>
+    <p id="notification"></p>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
         
-        console.log('Firebase модули загружены');
-
         const firebaseConfig = {
             apiKey: "AIzaSyAPMO1LCgDDVZ2MWEAi2Kd-0f95zZm3jps",
             authDomain: "gamerally-96db4.firebaseapp.com",
@@ -36,8 +32,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        console.log('Firebase инициализирован');
-
         document.getElementById('register-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
@@ -45,12 +39,15 @@
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     console.log('User registered:', userCredential.user);
+                    document.getElementById('notification').innerText = "Вы успешно зарегистрировались!";
                 })
                 .catch((error) => {
                     console.error('Error:', error);
+                    document.getElementById('notification').innerText = "Ошибка регистрации: " + error.message;
                 });
         });
     </script>
 </body>
 </html>
+
 

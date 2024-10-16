@@ -2,126 +2,31 @@
 <html>
 <head>
     <title>Турниры</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        input[type="email"], input[type="password"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        button {
-            background: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        p {
-            margin: 10px 0;
-        }
-    </style>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Добро пожаловать на сайт турниров!</h1>
-    <p>Этот сайт находится в разработке.</p>
-    <form id="register-form">
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-    <p id="notification"></p>
-    <form id="game-account-form" style="display:none;">
-        <input type="text" id="game-account" placeholder="Игровой аккаунт" required>
-        <button type="submit">Добавить аккаунт</button>
-    </form>
-    <p id="game-account-notification"></p>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAPMO1LCgDDVZ2MWEAi2Kd-0f95zZm3jps",
-            authDomain: "gamerally-96db4.firebaseapp.com",
-            projectId: "gamerally-96db4",
-            storageBucket: "gamerally-96db4.appspot.com",
-            messagingSenderId: "101581574376",
-            appId: "1:101581574376:web:3f164ddfe551a42c99b95d",
-            measurementId: "G-N0N821J8KJ"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        document.getElementById('register-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    console.log('User registered:', userCredential.user);
-                    document.getElementById('notification').innerText = "Вы успешно зарегистрировались!";
-                    document.getElementById('game-account-form').style.display = "block";
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    document.getElementById('notification').innerText = "Ошибка регистрации: " + error.message;
-                });
-        });
-
-        document.getElementById('game-account-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const user = auth.currentUser;
-            const gameAccount = document.getElementById('game-account').value;
-            if (user) {
-                setDoc(doc(db, "gameAccounts", user.uid), {
-                    email: user.email,
-                    gameAccount: gameAccount
-                })
-                .then(() => {
-                    console.log("Игровой аккаунт добавлен:", gameAccount);
-                    document.getElementById('game-account-notification').innerText = "Игровой аккаунт успешно добавлен!";
-                })
-                .catch((error) => {
-                    console.error("Ошибка добавления игрового аккаунта:", error);
-                    document.getElementById('game-account-notification').innerText = "Ошибка добавления игрового аккаунта: " + error.message;
-                });
-            }
-        });
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById('game-account-form').style.display = "block";
-            } else {
-                document.getElementById('game-account-form').style.display = "none";
-            }
-        });
-    </script>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Турниры</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Регистрация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Вход</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1>Добро пожаловать на сайт турниров!</h1>
+        <p>Этот сайт находится в разработке.</p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
